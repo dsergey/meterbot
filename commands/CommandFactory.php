@@ -4,43 +4,34 @@ namespace MeterDataBot\Commands;
 
 class CommandFactory
 {
+    private const COMMAND_DELIMITER = ' ';
+
     public static function fromPayload(array $payload): CommandInterface
     {
+        $factory = new static();
+
         if (empty($payload['message']['text'])) {
-            return self::exitWithLog($payload);
+            return new NullCommand();
         }
 
-        $command = $payload['message']['text'];
-
-        if (strncmp($command, '/', 1) !== 0) {
-            return self::exitWithLog($payload);
-        }
-//todo parse via regex
-        $command = substr($command, 1);
-
-        if ($command === false) {
-            return self::exitWithLog($payload);
-        }
-
-        $command = strtolower($command);
+        $command = strtolower($factory->extractCommand($payload['message']['text']));
         $className = '\MeterDataBot\Commands\\' . $command;
 
-        if (!class_exists($className)) {
-            return self::exitWithLog($payload);
+        if (!$command || !class_exists($className)) {
+            return new NullCommand();
         }
 
         return new $className();
     }
 
-    /**
-     * @param array $payload
-     *
-     * @return NullCommand
-     */
-    private static function exitWithLog(array $payload): NullCommand
+    private function extractCommand(string $string): string
     {
-        file_put_contents('error', var_export($payload), FILE_APPEND);
+        if (strncmp($string, '/', 1) !== 0) {
+            return '';
+        }
 
-        return new NullCommand();
+        $parts = explode(static::COMMAND_DELIMITER, substr($string, 1));
+
+        return empty($parts[0]) ? '' : trim($parts[0]);
     }
 }

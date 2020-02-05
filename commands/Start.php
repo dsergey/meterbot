@@ -11,19 +11,19 @@ class Start implements CommandInterface
      * @var HttpClientInterface
      */
     private $httpClient;
-
-    /**
-     * Start constructor.
-     *
-     * @param HttpClientInterface $httpClient
-     */
-    public function __construct(HttpClientInterface $httpClient)
-    {
-        $this->httpClient = $httpClient;
-    }
+//
+//    /**
+//     * Start constructor.
+//     *
+//     * @param HttpClientInterface $httpClient
+//     */
+//    public function __construct(HttpClientInterface $httpClient)
+//    {
+//        $this->httpClient = $httpClient;
+//    }
 
     public function execute(array $payload): void
     {
-        $this->httpClient->request();
+       // $this->httpClient->request();
     }
 }
