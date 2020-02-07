@@ -4,15 +4,10 @@ namespace MeterDataBot\Commands;
 
 use Symfony\Component\HttpClient\HttpClient;
 
-/**
- * Null command execute
- */
-class NullCommand implements CommandInterface
+class Add implements CommandInterface
 {
     public function execute(array $payload): void
     {
-        $messages = require(__DIR__ . '/../messages/ru.php');
-
         $h = HttpClient::create();
         $h->request(
             'POST',
@@ -20,7 +15,7 @@ class NullCommand implements CommandInterface
             [
                 'body' => [
                     'chat_id' => $payload['message']['chat']['id'],
-                    'text' => $messages['wrongCommand'],
+                    'text' => 'Adding😝',
                 ],
             ]
         );

@@ -6,22 +6,32 @@ class CommandFactory
 {
     private const COMMAND_DELIMITER = ' ';
 
+    public function __construct()
+    {
+        //register and load DI container
+    }
+
     public static function fromPayload(array $payload): CommandInterface
     {
         $factory = new static();
 
         if (empty($payload['message']['text'])) {
-            return new NullCommand();
+            return $factory->createCommandObject(NullCommand::class);
         }
 
         $command = strtolower($factory->extractCommand($payload['message']['text']));
         $className = '\MeterDataBot\Commands\\' . $command;
 
         if (!$command || !class_exists($className)) {
-            return new NullCommand();
+            return $factory->createCommandObject(NullCommand::class);
         }
 
-        return new $className();
+        return $factory->createCommandObject($className);
+    }
+
+    public function createCommandObject(string $classname): CommandInterface
+    {
+        return new $classname();
     }
 
     private function extractCommand(string $string): string

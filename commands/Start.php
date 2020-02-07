@@ -24,6 +24,18 @@ class Start implements CommandInterface
 
     public function execute(array $payload): void
     {
-       // $this->httpClient->request();
+        $messages = require(__DIR__ . '/../messages/ru.php');
+
+        $h = HttpClient::create();
+        $h->request(
+            'POST',
+            $_ENV['API_URI'] . $_ENV['BOT_SECRET'] . '/sendMessage',
+            [
+                'body' => [
+                    'chat_id' => $payload['message']['chat']['id'],
+                    'text' => $messages['hello'],
+                ],
+            ]
+        );
     }
 }
