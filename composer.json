@@ -4,14 +4,15 @@
     "minimum-stability": "stable",
     "require": {
       "ext-json": "*",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/http-client": "^5.0",
-        "vlucas/phpdotenv": "^4.1"
+        "symfony/dependency-injection": "4.4.4",
+        "symfony/http-client": "4.4.4",
+        "vlucas/phpdotenv": "4.1.0"
     },
     "autoload": {
         "psr-4": { "MeterDataBot\\": "" }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "vimeo/psalm": "^3.8"
     }
 }
