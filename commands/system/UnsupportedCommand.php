@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace MeterDataBot\Commands;
+namespace MeterDataBot\Commands\System;
 
 use MeterDataBot\ApiRequest;
-use MeterDataBot\Commands\System\CommandInterface;
 
-class Start implements CommandInterface
+/**
+ * Executes when user sent not supported command
+ */
+class UnsupportedCommand implements CommandInterface
 {
     /**
      * @var ApiRequest
@@ -19,11 +21,12 @@ class Start implements CommandInterface
 
     public function execute(array $payload): void
     {
-        $messages = require(__DIR__ . '/../messages/ru.php');
+        $messages = require(ROOT_DIR . '/messages/ru.php');
 
         $this->apiRequest->sendMessage(
             (int) $payload['message']['chat']['id'],
-            $messages['hello']
+            $messages['wrongCommand']
         );
     }
+
 }

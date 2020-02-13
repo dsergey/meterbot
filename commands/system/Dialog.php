@@ -1,11 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace MeterDataBot\Commands;
+namespace MeterDataBot\Commands\System;
 
 use MeterDataBot\ApiRequest;
-use MeterDataBot\Commands\System\CommandInterface;
 
-class Add implements CommandInterface
+/**
+ * Executes when user sent not a command (some message)
+ * it can be answers for some quiz
+ */
+class Dialog implements CommandInterface
 {
     /**
      * @var ApiRequest
@@ -19,10 +22,7 @@ class Add implements CommandInterface
 
     public function execute(array $payload): void
     {
-        $this->apiRequest->sendMessage(
-            (int) $payload['message']['chat']['id'],
-            'Adding😝'
-        );
+        // TODO: Implement execute() method.
     }
 
 }
