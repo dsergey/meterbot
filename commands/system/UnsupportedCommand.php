@@ -9,9 +9,6 @@ use MeterDataBot\ApiRequest;
  */
 class UnsupportedCommand implements CommandInterface
 {
-    /**
-     * @var ApiRequest
-     */
     private $apiRequest;
 
     public function __construct(ApiRequest $apiRequest)
@@ -21,11 +18,9 @@ class UnsupportedCommand implements CommandInterface
 
     public function execute(array $payload): void
     {
-        $messages = require(ROOT_DIR . '/messages/ru.php');
-
         $this->apiRequest->sendMessage(
             (int) $payload['message']['chat']['id'],
-            $messages['wrongCommand']
+            'The command is not supported'
         );
     }
 

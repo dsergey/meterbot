@@ -5,6 +5,11 @@ namespace MeterDataBot\Commands;
 use MeterDataBot\ApiRequest;
 use MeterDataBot\Commands\System\CommandInterface;
 
+/**
+ * Example of custom command handler
+ *
+ * @handles /start
+ */
 class Start implements CommandInterface
 {
     /**
@@ -19,11 +24,9 @@ class Start implements CommandInterface
 
     public function execute(array $payload): void
     {
-        $messages = require(__DIR__ . '/../messages/ru.php');
-
         $this->apiRequest->sendMessage(
             (int) $payload['message']['chat']['id'],
-            $messages['hello']
+            'Hello. I\'m a bot :)'
         );
     }
 }

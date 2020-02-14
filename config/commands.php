@@ -12,9 +12,4 @@ use MeterDataBot\Commands as Command;
 
 return [
     '/start' => [Command\Start::class],
-    '/add' => [Command\Add::class],
-    '/list' => [Command\AddressList::class],
-    '/energy' => [],
-    '/gas' => [],
-    '/water' => [],
 ];

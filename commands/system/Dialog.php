@@ -10,9 +10,6 @@ use MeterDataBot\ApiRequest;
  */
 class Dialog implements CommandInterface
 {
-    /**
-     * @var ApiRequest
-     */
     private $apiRequest;
 
     public function __construct(ApiRequest $apiRequest)
@@ -22,7 +19,10 @@ class Dialog implements CommandInterface
 
     public function execute(array $payload): void
     {
-        // TODO: Implement execute() method.
+        $this->apiRequest->sendMessage(
+            (int) $payload['message']['chat']['id'],
+            'Hello I\'m simple dialog example'
+        );
     }
 
 }
